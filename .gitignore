@@ -1,0 +1,2 @@
+data/raw/bike_share_data.csv
+dbt_bike_share/bike_share.db

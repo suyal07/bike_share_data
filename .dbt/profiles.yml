@@ -1,0 +1,7 @@
+bike_share:
+  outputs:
+    dev:
+      type: duckdb
+      path: C:/Users/Parth Suyal/Desktop/bike_share_analysis/dbt_bike_share/bike_share.db
+      threads: 1
+  target: dev

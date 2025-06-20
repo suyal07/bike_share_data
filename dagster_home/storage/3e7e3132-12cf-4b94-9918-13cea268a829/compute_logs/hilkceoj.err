@@ -1,0 +1,45 @@
+[32m2025-06-18 21:57:45 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 3e7e3132-12cf-4b94-9918-13cea268a829 - 222364 - LOGS_CAPTURED - Started capturing logs in process (pid: 222364).
+[32m2025-06-18 21:57:45 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 3e7e3132-12cf-4b94-9918-13cea268a829 - 222364 - raw_rides - STEP_START - Started execution of step "raw_rides".
+[32m2025-06-18 21:57:45 +0530[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - 3e7e3132-12cf-4b94-9918-13cea268a829 - 222364 - raw_rides - STEP_FAILURE - Execution of step "raw_rides" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "raw_rides"::
+
+FileNotFoundError: [Errno 2] No such file or directory: 'data/raw/bike_share_data.csv'
+
+Stack Trace:
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\dagster\_core\execution\plan\utils.py", line 54, in op_execution_error_boundary
+    yield
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\dagster\_utils\__init__.py", line 445, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\dagster\_core\execution\plan\compute_generator.py", line 124, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\dagster\_core\execution\plan\compute_generator.py", line 118, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+                                                                    ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\dagster_bike_share\assets\ingestion.py", line 9, in raw_rides
+    df = pd.read_csv("data/raw/bike_share_data.csv")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\pandas\util\_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\pandas\util\_decorators.py", line 331, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 950, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 605, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1442, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1735, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\Parth Suyal\Desktop\bike_share_analysis\venv\Lib\site-packages\pandas\io\common.py", line 856, in get_handle
+    handle = open(
+             ^^^^^
+[0m

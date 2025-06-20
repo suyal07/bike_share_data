@@ -1,0 +1,108 @@
+version: 2
+
+models:
+  - name: stg_rides
+    description: "Cleaned and typed ride data"
+    columns:
+      - name: trip_duration
+        description: "Duration of the trip in seconds"
+        tests:
+          - not_null
+          - positive_value
+
+      - name: start_time
+        description: "Start time of the trip"
+        tests:
+          - not_null
+
+      - name: stop_time
+        description: "End time of the trip"
+        tests:
+          - not_null
+
+      - name: start_station_id
+        description: "ID of the starting station"
+        tests:
+          - not_null
+
+      - name: start_station_name
+        description: "Name of the starting station"
+        tests:
+          - not_null
+
+      - name: end_station_id
+        description: "ID of the ending station"
+        tests:
+          - not_null
+
+      - name: end_station_name
+        description: "Name of the ending station"
+        tests:
+          - not_null
+
+      - name: bike_id
+        description: "Unique identifier for the bike used"
+        tests:
+          - not_null
+
+      - name: user_type
+        description: "Type of user (Member/Casual)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Subscriber', 'Customer']
+
+      - name: trip_duration_in_min
+        description: "Duration of the trip in minutes"
+        tests:
+          - not_null
+          - positive_value
+
+  - name: stg_stations
+    description: "Clean station data derived from ride information"
+    columns:
+      - name: station_id
+        description: "Unique identifier for the station"
+        tests:
+          - not_null
+          - unique
+
+      - name: station_name
+        description: "Name of the station"
+        tests:
+          - not_null
+
+      - name: latitude
+        description: "Latitude coordinate of the station"
+        tests:
+          - not_null
+
+      - name: longitude
+        description: "Longitude coordinate of the station"
+        tests:
+          - not_null
+
+  - name: stg_users
+    description: "User data derived from ride information"
+    columns:
+      - name: user_type
+        description: "Type of user (Member/Casual)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Subscriber', 'Customer']
+
+      - name: gender
+        description: "Gender of the user"
+
+      - name: birth_year
+        description: "Birth year of the user"
+
+      - name: age
+        description: "Age of the user calculated from birth year"
+
+tests:
+  - positive_value:
+      field: "{{ var('field_name') }}"
+      where: "{{ var('field_name') }} <= 0"
+

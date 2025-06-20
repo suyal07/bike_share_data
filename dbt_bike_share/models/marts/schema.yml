@@ -1,0 +1,194 @@
+version: 2
+
+models:
+  - name: dim_time
+    description: "Time dimension table for analysis"
+    columns:
+      - name: time_key
+        description: "Surrogate key for time dimension"
+        tests:
+          - not_null
+          - unique
+      
+      - name: date
+        description: "Calendar date"
+        tests:
+          - not_null
+      
+      - name: year
+        description: "Year"
+        tests:
+          - not_null
+      
+      - name: month
+        description: "Month number (1-12)"
+        tests:
+          - not_null
+      
+      - name: day
+        description: "Day of month"
+        tests:
+          - not_null
+      
+      - name: day_of_week
+        description: "Day of week (0-6, where 0 is Sunday)"
+        tests:
+          - not_null
+      
+      - name: hour
+        description: "Hour of day (0-23)"
+        tests:
+          - not_null
+      
+      - name: is_weekend
+        description: "Flag indicating if date is a weekend"
+        tests:
+          - not_null
+      
+      - name: month_name
+        description: "Month name"
+        tests:
+          - not_null
+      
+      - name: day_name
+        description: "Day name"
+        tests:
+          - not_null
+      
+      - name: time_of_day
+        description: "Part of day (Morning, Afternoon, Evening, Night)"
+        tests:
+          - not_null
+
+  - name: dim_stations
+    description: "Station dimension with location and traffic metrics"
+    columns:
+      - name: station_id
+        description: "Unique identifier for the station"
+        tests:
+          - not_null
+          - unique
+      
+      - name: station_name
+        description: "Name of the station"
+        tests:
+          - not_null
+      
+      - name: latitude
+        description: "Latitude coordinate of the station"
+        tests:
+          - not_null
+      
+      - name: longitude
+        description: "Longitude coordinate of the station"
+        tests:
+          - not_null
+      
+      - name: start_count
+        description: "Number of rides starting from this station"
+        tests:
+          - not_null
+      
+      - name: end_count
+        description: "Number of rides ending at this station"
+        tests:
+          - not_null
+      
+      - name: total_traffic
+        description: "Total number of arrivals and departures"
+        tests:
+          - not_null
+      
+      - name: net_flow
+        description: "Difference between departures and arrivals"
+
+  - name: dim_users
+    description: "User demographics dimension"
+    columns:
+      - name: user_key
+        description: "Surrogate key for user dimension"
+        tests:
+          - not_null
+          - unique
+      
+      - name: user_type
+        description: "Type of user (Subscriber/Customer)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Subscriber', 'Customer']
+      
+      - name: birth_year
+        description: "Birth year of the user"
+      
+      - name: gender
+        description: "Gender of the user"
+        tests:
+          - accepted_values:
+              values: ['Male', 'Female', 'Unknown', 'Other']
+      
+      - name: age
+        description: "Age of the user calculated from birth year"
+      
+      - name: age_group
+        description: "Age bracket for demographic analysis"
+        tests:
+          - accepted_values:
+              values: ['Under 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+', 'Unknown']
+
+  - name: fact_rides_summary
+    description: "Fact table with aggregated ride metrics"
+    columns:
+      - name: date
+        description: "Date of the ride"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_time')
+              field: date
+      
+      - name: start_station_id
+        description: "Starting station ID"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_stations')
+              field: station_id
+      
+      - name: end_station_id
+        description: "Ending station ID"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_stations')
+              field: station_id
+      
+      - name: user_key
+        description: "Foreign key to dim_users"
+        tests:
+          - relationships:
+              to: ref('dim_users')
+              field: user_key
+      
+      - name: time_key
+        description: "Foreign key to dim_time"
+        tests:
+          - relationships:
+              to: ref('dim_time')
+              field: time_key
+      
+      - name: ride_count
+        description: "Count of rides in this segment"
+        tests:
+          - not_null
+      
+      - name: avg_trip_duration_min
+        description: "Average trip duration in minutes"
+        tests:
+          - not_null
+      
+      - name: route_id
+        description: "Concatenated start and end station IDs"
+        tests:
+          - not_null
+

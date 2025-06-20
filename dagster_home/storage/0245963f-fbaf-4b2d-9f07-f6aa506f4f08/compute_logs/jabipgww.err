@@ -1,0 +1,7 @@
+[32m2025-06-18 22:04:36 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 0245963f-fbaf-4b2d-9f07-f6aa506f4f08 - 7628 - LOGS_CAPTURED - Started capturing logs in process (pid: 7628).
+[32m2025-06-18 22:04:36 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 0245963f-fbaf-4b2d-9f07-f6aa506f4f08 - 7628 - raw_rides - STEP_START - Started execution of step "raw_rides".
+[32m2025-06-18 22:04:37 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 0245963f-fbaf-4b2d-9f07-f6aa506f4f08 - 7628 - raw_rides - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2025-06-18 22:04:37 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 0245963f-fbaf-4b2d-9f07-f6aa506f4f08 - raw_rides - Writing file at: C:\Users\Parth Suyal\Desktop\bike_share_analysis\dagster_home\storage\raw_rides using PickledObjectFilesystemIOManager...
+[32m2025-06-18 22:04:38 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 0245963f-fbaf-4b2d-9f07-f6aa506f4f08 - 7628 - raw_rides - ASSET_MATERIALIZATION - Materialized value raw_rides.
+[32m2025-06-18 22:04:38 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 0245963f-fbaf-4b2d-9f07-f6aa506f4f08 - 7628 - raw_rides - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-06-18 22:04:38 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 0245963f-fbaf-4b2d-9f07-f6aa506f4f08 - 7628 - raw_rides - STEP_SUCCESS - Finished execution of step "raw_rides" in 2.53s.
